@@ -10,40 +10,16 @@ management, carts, orders, and optional Stripe payments.
 - MongoDB, either a local server or a MongoDB Atlas database
 - Stripe test keys only if you want to test online payments
 
-## Windows setup (PowerShell)
 
 Run these commands from the `backend-ecommerce-main` directory:
 
-```powershell
 py --version
 py -m venv venv
 .\venv\Scripts\Activate.ps1
 python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
-Copy-Item .env.example .env
-```
+python -m uvicorn main:app --host 127.0.0.1 --port 8000 --reload
 
-If PowerShell blocks virtual-environment activation, either allow local scripts
-for your user with
-`Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser`, or run
-the venv's Python directly:
-
-```powershell
-.\venv\Scripts\python.exe -m pip install -r requirements.txt
-```
-
-## macOS/Linux setup
-
-Run these commands from the `backend-ecommerce-main` directory:
-
-```sh
-python3 --version
-python3 -m venv venv
-source venv/bin/activate
-python -m pip install --upgrade pip
-python -m pip install -r requirements.txt
-cp .env.example .env
-```
 
 ## Environment configuration
 
@@ -67,19 +43,7 @@ When MongoDB is unavailable, the current backend falls back to an in-memory
 demo database. Its data is temporary and is lost when the process stops. Use a
 reachable MongoDB instance if you need persistent data.
 
-## Run the API
 
-From the backend directory, with the virtual environment active:
-
-```powershell
-python -m uvicorn main:app --host 127.0.0.1 --port 8000 --reload
-```
-
-Without activating the venv on Windows:
-
-```powershell
-.\venv\Scripts\python.exe -m uvicorn main:app --host 127.0.0.1 --port 8000 --reload
-```
 
 The API is available at:
 
